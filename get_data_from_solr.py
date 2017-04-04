@@ -7,6 +7,7 @@ from email.mime.multipart import MIMEMultipart
 from email.mime.application import MIMEApplication
 
 SOLR_URL = 'http://xxxxxxxxxxxxxx/select?q=MsgType_s%3A+%22BC%22&sort=EventGMT_dt+DESC&start=0&rows=20&wt=csv&indent=true'
+SOLR_DOMAIN = 'xxxxxxxxxxxxxx'
 SOLR_AUTH_USER = '******'
 SOLR_AUTH_PASSWORD = '******'
 
@@ -29,7 +30,7 @@ def generateAndSendReport():
 
 def getDataFromSolr(url):
 	pwdMan = urllib2.HTTPPasswordMgrWithDefaultRealm()
-	pwdMan.add_password(None, 'solrprod.cargosmart.org', SOLR_AUTH_USER, SOLR_AUTH_PASSWORD)
+	pwdMan.add_password(None, SOLR_DOMAIN, SOLR_AUTH_USER, SOLR_AUTH_PASSWORD)
 	auth_handler = urllib2.HTTPBasicAuthHandler(pwdMan)
 	opener = urllib2.build_opener(auth_handler)
 	urllib2.install_opener(opener)
